@@ -4,3 +4,9 @@ c:\users\thoma_000\documents\visual studio 2013\Projects\NFLPredictor\NFLPredict
 c:\users\thoma_000\documents\visual studio 2013\Projects\NFLPredictor\NFLPredictor\obj\Debug\NFLPredictor.csprojResolveAssemblyReference.cache
 c:\users\thoma_000\documents\visual studio 2013\Projects\NFLPredictor\NFLPredictor\obj\Debug\NFLPredictor.exe
 c:\users\thoma_000\documents\visual studio 2013\Projects\NFLPredictor\NFLPredictor\obj\Debug\NFLPredictor.pdb
+C:\Users\thoma_000\Documents\nfl-prediction\NFLPredictor\NFLPredictor\bin\Debug\NFLPredictor.exe.config
+C:\Users\thoma_000\Documents\nfl-prediction\NFLPredictor\NFLPredictor\obj\Debug\NFLPredictor.exe
+C:\Users\thoma_000\Documents\nfl-prediction\NFLPredictor\NFLPredictor\obj\Debug\NFLPredictor.pdb
+C:\Users\thoma_000\Documents\nfl-prediction\NFLPredictor\NFLPredictor\bin\Debug\NFLPredictor.exe
+C:\Users\thoma_000\Documents\nfl-prediction\NFLPredictor\NFLPredictor\bin\Debug\NFLPredictor.pdb
+C:\Users\thoma_000\Documents\nfl-prediction\NFLPredictor\NFLPredictor\obj\Debug\NFLPredictor.csprojResolveAssemblyReference.cache
