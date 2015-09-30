@@ -1,0 +1,6 @@
+c:\users\thoma_000\documents\visual studio 2013\Projects\NFLPredictor\NFLPredictor\bin\Debug\NFLPredictor.exe.config
+c:\users\thoma_000\documents\visual studio 2013\Projects\NFLPredictor\NFLPredictor\bin\Debug\NFLPredictor.exe
+c:\users\thoma_000\documents\visual studio 2013\Projects\NFLPredictor\NFLPredictor\bin\Debug\NFLPredictor.pdb
+c:\users\thoma_000\documents\visual studio 2013\Projects\NFLPredictor\NFLPredictor\obj\Debug\NFLPredictor.csprojResolveAssemblyReference.cache
+c:\users\thoma_000\documents\visual studio 2013\Projects\NFLPredictor\NFLPredictor\obj\Debug\NFLPredictor.exe
+c:\users\thoma_000\documents\visual studio 2013\Projects\NFLPredictor\NFLPredictor\obj\Debug\NFLPredictor.pdb
