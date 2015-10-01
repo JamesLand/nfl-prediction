@@ -99,7 +99,6 @@ namespace NFLPredictor
 
                         while ((line = sr.ReadLine()) != null)
                         {
-                            Console.WriteLine(line);
                             var csvProperties = line.Split(',');
                             int week;
                             while ((Int32.TryParse(csvProperties[0], out week)) == false)
@@ -112,7 +111,8 @@ namespace NFLPredictor
 
                             if (line == null)
                                 break;
-
+                            Console.WriteLine(line);
+   
                             bool byeWeek = csvProperties[8] == "Bye Week";
 
                             #region Game object initialization
@@ -173,6 +173,8 @@ namespace NFLPredictor
 
                             Atlanta.Games.Add(game);
                         }
+                        Console.WriteLine();
+
                     }
                 } 
             }
