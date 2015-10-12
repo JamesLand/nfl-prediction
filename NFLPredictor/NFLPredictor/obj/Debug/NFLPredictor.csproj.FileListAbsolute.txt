@@ -7,3 +7,6 @@ c:\users\thoma_000\documents\visual studio 2013\Projects\NFLPredictor\NFLPredict
 D:\nflPred\nfl-prediction\NFLPredictor\NFLPredictor\bin\Debug\NFLPredictor.exe.config
 D:\nflPred\nfl-prediction\NFLPredictor\NFLPredictor\obj\Debug\NFLPredictor.exe
 D:\nflPred\nfl-prediction\NFLPredictor\NFLPredictor\obj\Debug\NFLPredictor.pdb
+D:\nflPred\nfl-prediction\NFLPredictor\NFLPredictor\obj\Debug\NFLPredictor.csprojResolveAssemblyReference.cache
+D:\nflPred\nfl-prediction\NFLPredictor\NFLPredictor\bin\Debug\NFLPredictor.exe
+D:\nflPred\nfl-prediction\NFLPredictor\NFLPredictor\bin\Debug\NFLPredictor.pdb

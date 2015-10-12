@@ -10,6 +10,12 @@ namespace NFLPredictor.Data_Processing
     {
         public String Name { get; set; }
         public String Year { get; set; }
+        public int[] WeeksStarted { get; set; }
         public List<QuarterbackLog> Logs { get; set; }
+
+        public QuarterbackLogs()
+        {
+            Logs = new List<QuarterbackLog>();
+        }
     }
 }

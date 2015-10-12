@@ -8,15 +8,17 @@ namespace NFLPredictor.Data_Processing
 {
     public class SeasonLog
     {
+        public String Name { get; set; }
+        public String Year { get; set; }
         public TeamGamelogs GameLogs { get; set; }
-        public QuarterbackLogs QuarterbackLogs { get; set; }
-        public SkillPlayerLogs SkillPlayerLogs { get; set; }
+        public List<QuarterbackLogs> Quarterbacks { get; set; }
+        public List<SkillPlayerLogs> SkillPlayers { get; set; }
 
         public SeasonLog()
         {
             GameLogs = new TeamGamelogs();
-            QuarterbackLogs = new QuarterbackLogs();
-            SkillPlayerLogs = new SkillPlayerLogs();
+            Quarterbacks = new List<QuarterbackLogs>();
+            SkillPlayers = new List<SkillPlayerLogs>();
         }
     }
 }

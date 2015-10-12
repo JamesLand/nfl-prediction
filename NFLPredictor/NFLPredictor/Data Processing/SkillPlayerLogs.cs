@@ -10,6 +10,12 @@ namespace NFLPredictor.Data_Processing
     {
         public String Name { get; set; }
         public String Year { get; set; }
+        public int TotalTDs { get; set; }
         public List<SkillPlayerLog> Logs { get; set; }
+
+        public SkillPlayerLogs()
+        {
+            Logs = new List<SkillPlayerLog>();
+        }
     }
 }

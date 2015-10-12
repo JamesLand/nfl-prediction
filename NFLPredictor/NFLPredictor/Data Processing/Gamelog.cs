@@ -12,6 +12,7 @@ namespace NFLPredictor.Data_Processing
         public String Opponent { get; set; }
         public bool DidTeamWin { get; set; }
         public bool WasAtHome { get; set; }
+        public bool WasByeWeek { get; set; }
         public int TeamScore { get; set; }
         public int OpposingTeamScore { get; set; }
         public int OffenseFirstDowns { get; set; }
@@ -24,6 +25,13 @@ namespace NFLPredictor.Data_Processing
         public int DefensePassYards { get; set; }
         public int DefenseRushYards { get; set; }
         public int DefenseTurnovers { get; set; }
+        public int TurnoverMargin
+        {
+            get
+            {
+                return DefenseTurnovers - OffenseTurnovers;
+            }
+        }
 
     }
 }
