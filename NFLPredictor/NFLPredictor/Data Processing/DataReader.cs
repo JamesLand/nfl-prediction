@@ -11,8 +11,9 @@ namespace NFLPredictor.Data_Processing
     {
         const string rootFolder = "D:\\nflPred\\nfl-prediction\\csv\\";
 
-        public List<SeasonSnapshot> ReadSeason(String teamAbrev, String year)
+        public List<SeasonSnapshot> ReadSeason(String teamAbrev, String year, out List<Game> games)
         {
+            games = new List<Game>();
             SeasonLog seasonLog = new SeasonLog
             {
                 Name = teamAbrev,
@@ -31,7 +32,10 @@ namespace NFLPredictor.Data_Processing
             for (int i = 1; i <= 17; i++)
             {
                 SeasonSnapshot snapshot = SeasonSnapshotFactory.CreateSeasonSnapshot(seasonLog, i);
+                snapshot.Abbreviation = teamAbrev;
                 snapshots.Add(snapshot);
+                Game game = GameFactory.CreateGame(seasonLog, i);
+                if (!game.WasBye && (game.Week > 4 && game.Week != 17)) games.Add(game);
             }
             return snapshots;
         }
@@ -44,7 +48,7 @@ namespace NFLPredictor.Data_Processing
             }
             else
             {
-                // ReadPlayerGameLogs(filePath, ref seasonLog);
+                ReadPlayerGameLogs(filePath, ref seasonLog);
             }
         }
 
@@ -57,7 +61,7 @@ namespace NFLPredictor.Data_Processing
 
                 while ((line = sr.ReadLine()) != null)
                 {
-                    Console.WriteLine(line);
+                    //Console.WriteLine(line);
                     var csvProperties = line.Split(',');
                     int week;
                     
@@ -68,7 +72,7 @@ namespace NFLPredictor.Data_Processing
                         if (line != null)
                             csvProperties = line.Split(',');
                     }
-                    Console.WriteLine();
+                    //Console.WriteLine();
                     
 
                     Gamelog game = new Gamelog
@@ -90,8 +94,10 @@ namespace NFLPredictor.Data_Processing
                         DefenseRushYards = csvProperties[19].Equals("") ? 0 : Int32.Parse(csvProperties[19]),
                         DefenseTurnovers = csvProperties[20].Equals("") ? 0 : Int32.Parse(csvProperties[20]),
                     };
-
-                    game.WasByeWeek = game.Opponent.Equals("Bye Week");
+                    if (game.Opponent.Equals("Bye Week")){
+                        game.WasByeWeek = true;
+                        gamelogs.ByeWeek = game.Week;
+                    }
                     gamelogs.Weeks.Add(game.Week, game);
                     if (gamelogs.Weeks.Count >= 17)
                     {
@@ -109,10 +115,12 @@ namespace NFLPredictor.Data_Processing
                 string line;
                 QuarterbackLogs qbLogs;
                 SkillPlayerLogs spLogs;
-                bool isQB = true;
-                while ((line = sr.ReadLine()) != null)
-                {
-                }
+                //bool isQB = true;
+                //while ((line = sr.ReadLine()) != null)
+                //{
+                //}
+                line = sr.ReadLine();
+                line = sr.ReadLine();
                 Console.WriteLine(line);
                 var csvProperties = line.Split(',');
                 int week;
@@ -125,28 +133,31 @@ namespace NFLPredictor.Data_Processing
                 if (csvProperties[9].Equals("Passing")) //Is a quarterback
                 {
                     qbLogs = new QuarterbackLogs();
-
+                    line = sr.ReadLine();
                     while ((line = sr.ReadLine()) != null)
                     {
-                        while ((Int32.TryParse(csvProperties[0], out week)) == false)
+                        csvProperties = line.Split(',');
+                        if ((Int32.TryParse(csvProperties[0], out week)) == false)
                         {
-                            line = sr.ReadLine();
-                            if (line != null)
-                                csvProperties = line.Split(',');
+                            break;
                         }
                         Console.WriteLine();
 
                         QuarterbackLog qbLog = new QuarterbackLog
                         {
-                            Week = Int32.Parse(csvProperties[0]),
-                            Opponent = csvProperties[8],
+                            Week = Int32.Parse(csvProperties[1]),
+                            Opponent = csvProperties[6],
                             PassingAttempts = csvProperties[10].Equals("") ? 0 : Int32.Parse(csvProperties[10]),
                             PassingCompletions = csvProperties[9].Equals("") ? 0 : Int32.Parse(csvProperties[9]),
                             PassingYards = csvProperties[12].Equals("") ? 0 : Int32.Parse(csvProperties[12]),
                             Touchdowns = csvProperties[13].Equals("") ? 0 : Int32.Parse(csvProperties[13]),
                             Interceptions = csvProperties[14].Equals("") ? 0 : Int32.Parse(csvProperties[14]),
                         };
-                        qbLogs.Logs.Add(qbLog);
+                        if (csvProperties[8].Equals("*"))
+                        {
+                            qbLogs.GamesStarted.Add(Int32.Parse(csvProperties[1]));
+                        }
+                        qbLogs.Logs.Add(qbLog.Week, qbLog);
 
                     }
                     seasonLog.Quarterbacks.Add(qbLogs);
@@ -177,19 +188,14 @@ namespace NFLPredictor.Data_Processing
                     }
                     while ((line = sr.ReadLine()) != null)
                     {
-
-                        while ((Int32.TryParse(csvProperties[0], out week)) == false)
-                        {
-                            line = sr.ReadLine();
-                            if (line != null)
-                                csvProperties = line.Split(',');
-                        }
+                        csvProperties = line.Split(',');
+                        if (!(Int32.TryParse(csvProperties[0], out week))) break;
                         Console.WriteLine();
 
                         SkillPlayerLog spLog = new SkillPlayerLog
                         {
-                            Week = Int32.Parse(csvProperties[0]),
-                            Opponent = csvProperties[8],
+                            Week = Int32.Parse(csvProperties[1]),
+                            Opponent = csvProperties[6],
                             Touchdowns = csvProperties[touchdownsColumn].Equals("") ? 0 : Int32.Parse(csvProperties[touchdownsColumn]),
                             Yards = 0
                         };
@@ -197,7 +203,8 @@ namespace NFLPredictor.Data_Processing
                         {
                             spLog.Yards += csvProperties[yardsColumns[i]].Equals("") ? 0 : Int32.Parse(csvProperties[yardsColumns[i]]);
                         }
-                        spLogs.Logs.Add(spLog);
+                        //spLogs.GamesPlayedIn.Add(spLog.Week);
+                        spLogs.Logs.Add(spLog.Week, spLog);
                     }
 
                     seasonLog.SkillPlayers.Add(spLogs);

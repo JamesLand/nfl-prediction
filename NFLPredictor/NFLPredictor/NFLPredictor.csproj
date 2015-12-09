@@ -44,9 +44,11 @@
   <ItemGroup>
     <Compile Include="Constants.cs" />
     <Compile Include="Data Processing\DataReader.cs" />
+    <Compile Include="Data Processing\GameFactory.cs" />
     <Compile Include="Data Processing\Gamelog.cs" />
     <Compile Include="Data Processing\QuarterbackLog.cs" />
     <Compile Include="Data Processing\QuarterbackLogs.cs" />
+    <Compile Include="Data Processing\ResultsWriter.cs" />
     <Compile Include="Data Processing\SeasonLog.cs" />
     <Compile Include="Data Processing\SeasonSnapshotFactory.cs" />
     <Compile Include="Data Processing\SkillPlayerLog.cs" />

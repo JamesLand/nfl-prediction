@@ -12,6 +12,7 @@ namespace NFLPredictor.Data_Processing
         public String TeamName { get; set; }
         public String Year { get; set; }
         public Dictionary<int, Gamelog> Weeks { get; set; }
+        public int ByeWeek { get; set; }
 
         public TeamGamelogs()
         {

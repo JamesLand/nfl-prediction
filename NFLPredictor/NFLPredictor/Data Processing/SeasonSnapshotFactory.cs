@@ -10,7 +10,7 @@ namespace NFLPredictor.Data_Processing
     {
         public static SeasonSnapshot CreateSeasonSnapshot(SeasonLog log, int week)
         {
-            return new SeasonSnapshot
+            SeasonSnapshot snapshot =  new SeasonSnapshot
             {
                 Name = log.Name,
                 Year = log.Year,
@@ -25,8 +25,35 @@ namespace NFLPredictor.Data_Processing
                 PassingYardsAllowed= log.GameLogs.PropertyUpToWeek("DefensePassYards", week),
                 RushingYards= log.GameLogs.PropertyUpToWeek("OffenseRushYards", week),
                 RushingYardsAllowed= log.GameLogs.PropertyUpToWeek("DefenseRushYards", week),
-                TurnoverMargin = log.GameLogs.PropertyUpToWeek("TurnoverMargin", week)
+                TurnoverMargin = log.GameLogs.PropertyUpToWeek("TurnoverMargin", week),
+                PassAttempts = log.GetQBStatUpToWeek(week, "PassingAttempts"),
+                PassCompletions = log.GetQBStatUpToWeek(week, "PassingCompletions"),
+                QBPassingYards = log.GetQBStatUpToWeek(week, "PassingYards"),
+                QBTouchdowns = log.GetQBStatUpToWeek(week, "Touchdowns"),
+                Interceptions = log.GetQBStatUpToWeek(week, "Interceptions"),
+                SkillPlayers = new List<SkillPlayer>()
             };
+            foreach (SkillPlayerLogs skillPlayer in log.SkillPlayers)
+            {
+                if (week >= log.GameLogs.ByeWeek)
+                {
+                    snapshot.SkillPlayers.Add(new SkillPlayer
+                    {
+                        Yards = skillPlayer.GetSPStatUpToGame(week - 1, "Yards"),
+                        Touchdowns = skillPlayer.GetSPStatUpToGame(week - 1, "Touchdowns")
+                    });
+                }
+                else
+                {
+                    snapshot.SkillPlayers.Add(new SkillPlayer
+                    {
+                        Yards = skillPlayer.GetSPStatUpToGame(week, "Yards"),
+                        Touchdowns = skillPlayer.GetSPStatUpToGame(week, "Touchdowns")
+                    });
+                }
+            }
+
+            return snapshot;
         }
 
         
